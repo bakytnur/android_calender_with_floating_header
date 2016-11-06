@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <View
+        android:id="@+id/shadow_view_top"
+        android:layout_above="@+id/agenda_view_group_text"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/layout_shadow"
+        android:visibility="gone"/>
+    <TextView
+        android:id="@+id/agenda_view_group_text"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/agenda_view_header_height"
+        android:gravity="center|left"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        android:paddingLeft="14dp"
+        />
+    <TextView
+        android:id="@+id/group_id_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+    <View
+        android:id="@+id/shadow_view_bottom"
+        android:layout_below="@+id/agenda_view_group_text"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/layout_shadow"
+        android:visibility="gone"/>
+</LinearLayout>

@@ -1,0 +1,24 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <dimen name="nav_header_height">160dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">0dp</dimen>
+    <dimen name="activity_vertical_margin">64dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="calendar_header_height">32dp</dimen>
+    <dimen name="calendar_header_item_height">12dp</dimen>
+    <dimen name="calendar_item_height">52dp</dimen>
+    <dimen name="calendar_min_height">104dp</dimen>
+    <dimen name="calendar_max_height">260dp</dimen>
+    <dimen name="grid_item_day_text_size">14dp</dimen>
+    <dimen name="grid_item_month_text_size">11dp</dimen>
+    <dimen name="grid_item_circle_width">20dp</dimen>
+    <dimen name="grid_item_circle_height">20dp</dimen>
+    <dimen name="agenda_view_header_height">34dp</dimen>
+    <dimen name="agenda_view_no_event_height">40dp</dimen>
+    <dimen name="event_column_height">70dp</dimen>
+    <dimen name="event_big_column_height">80dp</dimen>
+    <dimen name="event_time_width">70dp</dimen>
+    <dimen name="event_small_column_height">60dp</dimen>
+</resources>

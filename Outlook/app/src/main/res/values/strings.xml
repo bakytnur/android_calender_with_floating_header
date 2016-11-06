@@ -1,0 +1,91 @@
+<resources>
+    <string name="app_name">Outlook</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_done">Done</string>
+    <string name="action_edit">Edit</string>
+    <string name="sunday_short">S</string>
+    <string name="monday_short">M</string>
+    <string name="tuesday_short">T</string>
+    <string name="wednesday_short">W</string>
+    <string name="thursday_short">T</string>
+    <string name="friday_short">F</string>
+    <string name="saturday_short">S</string>
+
+    <string name="title">Title</string>
+    <string name="all_day_event">All Day Event</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="hour">hour</string>
+    <string name="duration">Duration</string>
+    <string name="location">Location</string>
+    <string name="currentAccount">Account</string>
+    <string name="alert">Alert</string>
+    <string name="description">Description</string>
+
+    <string name="title_activity_add_event">New Event</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End date</string>
+    <string name="start_time">Start time</string>
+    <string name="end_time">End time</string>
+    <string name="date_time_warning">Event end date should be later.</string>
+    <string name="dlg_title_date">Wrong date</string>
+    <string name="event_title_warning">Event name is required</string>
+    <string name="dlg_title_title">Input a name</string>
+    <array name="months_in_short">
+        <item>Jan</item>
+        <item>Feb</item>
+        <item>Mar</item>
+        <item>Apr</item>
+        <item>May</item>
+        <item>Jun</item>
+        <item>Jul</item>
+        <item>Aug</item>
+        <item>Sep</item>
+        <item>Oct</item>
+        <item>Nov</item>
+        <item>Dec</item>
+    </array>
+    <array name="months_in_full">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </array>
+    <array name="week_days">
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+    </array>
+    <string name="none">None</string>
+    <string name="on_time">At time of event</string>
+    <string name="minutes_before_5">5 minutes before</string>
+    <string name="minutes_before_10">10 minutes before</string>
+    <string name="minutes_before_15">15 minutes before</string>
+    <string name="minutes_before_30">30 minutes before</string>
+    <string name="hour_before">1 hour before</string>
+    <string name="day_before">1 day before</string>
+    <string name="no_event">No event</string>
+    <string name="edit_event">Edit Event</string>
+    <string name="today">TODAY</string>
+    <string name="tomorrow">TOMORROW</string>
+    <string name="yesterday">YESTERDAY</string>
+    <string name="action_delete">Delete</string>
+    <string name="confirm_delete">The event will be deleted.</string>
+
+</resources>

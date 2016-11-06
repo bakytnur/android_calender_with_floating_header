@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/none"
+            android:title="@string/none"/>
+        <item android:id="@+id/on_time"
+            android:title="@string/on_time"/>
+        <item android:id="@+id/minutes_before_5"
+            android:title="@string/minutes_before_5"/>
+        <item android:id="@+id/minutes_before_10"
+            android:title="@string/minutes_before_10"/>
+        <item android:id="@+id/minutes_before_15"
+            android:title="@string/minutes_before_15"/>
+        <item android:id="@+id/minutes_before_30"
+            android:title="@string/minutes_before_30"/>
+        <item android:id="@+id/hour_before"
+            android:title="@string/hour_before"/>
+        <item android:id="@+id/day_before"
+            android:title="@string/day_before"/>
+    </group>
+</menu>
