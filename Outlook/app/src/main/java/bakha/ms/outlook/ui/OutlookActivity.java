@@ -124,8 +124,8 @@ public class OutlookActivity extends AppCompatActivity
     private void initializeAccount() {
         Account account = new Account();
         account.setAccountId(10000);
-        account.setName("Bakhatnur");
-        account.setLastName("Baityeli");
+        account.setName("John");
+        account.setLastName("Smith");
         account.setEmail("bakytnur@hotmail.com");
         account.setTitle("Hotmail Account");
         mAccountManager.addAccount(account);
@@ -133,9 +133,9 @@ public class OutlookActivity extends AppCompatActivity
 
         Account account2 = new Account();
         account2.setAccountId(10020);
-        account2.setName("George");
-        account2.setLastName("White");
-        account2.setEmail("mrwhite@gmail.com");
+        account2.setName("John W");
+        account2.setLastName("Smith");
+        account2.setEmail("mr.smith@gmail.com");
         account2.setTitle("Gmail Account");
         mAccountManager.addAccount(account2);
     }
