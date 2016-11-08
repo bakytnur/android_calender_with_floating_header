@@ -94,7 +94,7 @@ public class Utils {
 
     public static int getDifferenceInDays(Calendar time, Calendar anotherTime) {
         long diff = anotherTime.getTime().getTime() - time.getTime().getTime();
-        int diffInDays = (int) (diff / (24 * 60 * 60 * 1000));
+        int diffInDays = (int) Math.ceil(diff / (24 * 60 * 60 * 1000));
         return diffInDays;
     }
 
@@ -102,6 +102,20 @@ public class Utils {
         long diff = anotherTime.getTime().getTime() - time.getTime().getTime();
         int diffInHour = (int) Math.ceil(diff / (60 * 60 * 1000));
         int diffInMinute = (int) Math.ceil( (diff - diffInHour * 60 * 60 * 1000) / (60 * 1000));
-        return diffInHour + "h" + diffInMinute + "m";
+        StringBuilder diffBuilder = new StringBuilder();
+        if (diffInHour > 0) {
+            diffBuilder.append(diffInHour + "h");
+        }
+
+        if (diffInMinute > 0) {
+            diffBuilder.append(diffInMinute + "m");
+        }
+        return diffBuilder.toString();
+    }
+
+    public static int getDifferenceInMinutes(Calendar time, Calendar anotherTime) {
+        long diff = anotherTime.getTime().getTime() - time.getTime().getTime();
+        int diffInMinute = (int) Math.ceil(diff / (60 * 1000));
+        return diffInMinute;
     }
 }

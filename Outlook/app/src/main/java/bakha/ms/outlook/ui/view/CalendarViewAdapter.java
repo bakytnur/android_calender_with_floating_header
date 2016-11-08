@@ -117,6 +117,10 @@ public class CalendarViewAdapter extends BaseAdapter {
         mPreviousBackground = convertView.getBackground();
         circleLayout.setBackground(mPreviousBackground);
 
+        if (todayDate.compareTo(calendarDate) == 0) {
+            dayTextView.setTextColor(mContext.getResources().getColor(R.color.colorGridText));
+        }
+
         if (calendarDate.compareTo(selectedDate) == 0) {
             dayTextView.setTextColor(mContext.getResources().getColor(android.R.color.white));
             circleLayout.setBackground(mContext.getResources().getDrawable(R.drawable.current_sell_background));

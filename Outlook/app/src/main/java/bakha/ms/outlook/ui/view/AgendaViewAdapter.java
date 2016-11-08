@@ -30,7 +30,6 @@ public class AgendaViewAdapter extends BaseExpandableListAdapter {
     private Context mContext;
     private String[] mWeekdays;
     private String[] mMonths;
-    private TextView mGroupIdText;
 
     public AgendaViewAdapter(Context context) {
         mContext = context;
@@ -66,10 +65,7 @@ public class AgendaViewAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getGroup(int groupPosition) {
-        if (mGroupIdText != null) {
-            mGroupIdText.setText(String.valueOf(groupPosition));
-        }
-        return mGroupIdText;
+        return Integer.valueOf(groupPosition);
     }
 
     @Override
@@ -105,10 +101,15 @@ public class AgendaViewAdapter extends BaseExpandableListAdapter {
 
         TextView agendaViewGroup = (TextView) convertView
                 .findViewById(R.id.agenda_view_group_text);
-        // hidden view for group id
-        mGroupIdText = (TextView) convertView.findViewById(R.id.group_id_view);
+        agendaViewGroup.setTextColor(mContext.getResources().getColor(R.color.colorGroupText));
 
-        agendaViewGroup.setText(getProperDateString(mCalendarDateList.get(groupPosition)));
+        Calendar calendarDate = mCalendarDateList.get(groupPosition);
+        Calendar todayDate = mOutlookManager.getTodayDate();
+        if (todayDate.compareTo(calendarDate) == 0) {
+            agendaViewGroup.setTextColor(mContext.getResources().getColor(R.color.colorGridText));
+        }
+
+        agendaViewGroup.setText(getProperDateString(calendarDate));
         agendaViewGroup.setText(agendaViewGroup.getText().toString().toUpperCase());
         return convertView;
     }
@@ -152,8 +153,13 @@ public class AgendaViewAdapter extends BaseExpandableListAdapter {
                 eventIdText.setText(String.valueOf(event.getEventId()));
                 hasEvent = true;
                 eventViewLayout.setVisibility(View.VISIBLE);
-                startTimeText.setText(Utils.getFormattedTime(timeSlot.getStartTime()));
-                durationText.setText(Utils.getDifferenceInHour(timeSlot.getStartTime(), timeSlot.getEndTime()));
+                if (event.isFullDayEvent()) {
+                    startTimeText.setText(R.string.all_day_event_short);
+                    durationText.setText(event.getTimeSlots().size() + "d");
+                } else {
+                    startTimeText.setText(Utils.getFormattedTime(timeSlot.getStartTime()));
+                    durationText.setText(Utils.getDifferenceInHour(timeSlot.getStartTime(), timeSlot.getEndTime()));
+                }
                 eventTitleText.setText(event.getTitle());
                 if (event.getLocation() != null && event.getLocation().length() > 0) {
                     locationLayout.setVisibility(View.VISIBLE);

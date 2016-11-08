@@ -17,6 +17,7 @@
 
     <string name="title">Title</string>
     <string name="all_day_event">All Day Event</string>
+    <string name="all_day_event_short">ALL DAY</string>
     <string name="date">Date</string>
     <string name="time">Time</string>
     <string name="hour">hour</string>

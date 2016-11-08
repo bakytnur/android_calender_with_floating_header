@@ -17,27 +17,29 @@ import bakha.ms.outlook.data.Event;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
         // Database Version
-        private static final int DATABASE_VERSION = 1;
+        private static final int DATABASE_VERSION = 2;
         // Database Name
         private static final String DATABASE_NAME = "outlookCalendar";
         // Table Names
         private static final String TABLE_EVENTS = "events";
-
+        // Column names
         private static final String KEY_EVENT_ID = "event_id";
         private static final String KEY_EVENT_TITLE = "event_title";
+        private static final String KEY_EVENT_FULL_DAY = "event_full_day";
         private static final String KEY_LOCATION = "location";
         private static final String KEY_DESCR = "description";
         private static final String KEY_START_TIME = "start_time";
         private static final String KEY_END_TIME = "end_time";
         private static final String KEY_ALERT_TYPE = "alert_type";
         private static final String KEY_ACCOUNT = "account";
-        private static final String KEY_TIME_SLOT_ID = "time_slot_id";
+
 
         // Event table
         private static final String CREATE_TABLE_EVENTS = "CREATE TABLE "
                 + TABLE_EVENTS + "("
                 + KEY_EVENT_ID + " INTEGER PRIMARY KEY,"
                 + KEY_EVENT_TITLE + " TEXT,"
+                + KEY_EVENT_FULL_DAY + " INTEGER,"
                 + KEY_LOCATION + " TEXT,"
                 + KEY_DESCR + " TEXT,"
                 + KEY_START_TIME + " LONG,"
@@ -68,6 +70,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put(KEY_EVENT_TITLE, event.getTitle());
+            values.put(KEY_EVENT_FULL_DAY, event.isFullDayEvent());
             values.put(KEY_LOCATION, event.getLocation());
             values.put(KEY_DESCR, event.getDescription());
             values.put(KEY_START_TIME, event.getStartTime().getTimeInMillis());
@@ -84,6 +87,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             ContentValues values = new ContentValues();
             values.put(KEY_EVENT_TITLE, event.getTitle());
+            values.put(KEY_EVENT_FULL_DAY, event.isFullDayEvent());
             values.put(KEY_LOCATION, event.getLocation());
             values.put(KEY_DESCR, event.getDescription());
             values.put(KEY_START_TIME, event.getStartTime().getTimeInMillis());
@@ -113,6 +117,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     Event event = new Event();
                     event.setEventId(c.getInt(c.getColumnIndex(KEY_EVENT_ID)));
                     event.setTitle(c.getString(c.getColumnIndex(KEY_EVENT_TITLE)));
+                    event.setFullDayEvent(c.getInt(c.getColumnIndex(KEY_EVENT_FULL_DAY)) == 1 ? true : false);
                     event.setLocation(c.getString(c.getColumnIndex(KEY_LOCATION)));
                     Account account = AccountManager.getInstance().getAccount(c.getString(c.getColumnIndex(KEY_ACCOUNT)));
                     event.setAccount(account);

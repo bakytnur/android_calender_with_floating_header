@@ -10,6 +10,7 @@ import bakha.ms.outlook.data.helper.Utils;
 public class Event {
     private int eventId;
     private String title;
+    private boolean isFullDayEvent;
     private String location;
     private String description;
     private Calendar startTime;
@@ -32,6 +33,14 @@ public class Event {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public boolean isFullDayEvent() {
+        return isFullDayEvent;
+    }
+
+    public void setFullDayEvent(boolean fullDayEvent) {
+        isFullDayEvent = fullDayEvent;
     }
 
     public String getLocation() {

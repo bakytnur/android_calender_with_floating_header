@@ -5,5 +5,7 @@
     <color name="colorAccent">#3F51B5</color>
     <color name="colorGridText">#3F51B5</color>
     <color name="colorGridBg">#f4f6f9</color>
+    <color name="colorGroupText">#8b8f96</color>
+
 
 </resources>

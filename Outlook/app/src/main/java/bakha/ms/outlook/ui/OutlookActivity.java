@@ -17,7 +17,6 @@ import android.view.SubMenu;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.GridView;
-import android.widget.TextView;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -47,6 +46,7 @@ public class OutlookActivity extends AppCompatActivity
     private AgendaView mAgendaView;
     private AgendaViewAdapter mAgendaViewAdapter;
     private Context mContext;
+    private boolean mActivityLoaded;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,6 +167,7 @@ public class OutlookActivity extends AppCompatActivity
     @Override
     public void onResume() {
         super.onResume();
+        mActivityLoaded = true;
         if (mAgendaViewAdapter != null) {
             mAgendaViewAdapter.refresh();
             mAgendaViewAdapter.notifyDataSetChanged();
@@ -271,13 +272,15 @@ public class OutlookActivity extends AppCompatActivity
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         switch (view.getId()) {
             case R.id.agenda_view:
-                if (firstVisibleItem != mOutlookManager.getPosition()) {
+                if (mActivityLoaded && firstVisibleItem > 0 && firstVisibleItem != mOutlookManager.getPosition()) {
+                    Log.d("dddd", "firstVisibleItem = " + firstVisibleItem + ", mOutlookManager.getPosition() = " +mOutlookManager.getPosition());
                     if (mAgendaView.getItemAtPosition(firstVisibleItem) != null) {
-                        TextView textView = (TextView) mAgendaView.getItemAtPosition(firstVisibleItem);
-                        int position = Integer.valueOf(textView.getText().toString());
+                        int position = (Integer)mAgendaView.getItemAtPosition(firstVisibleItem);
+                        updateTitleBar(position);
                         mOutlookManager.setPosition(position);
                         mCalendarView.smoothScrollToPosition(position);
                         mCalendarViewAdapter.notifyDataSetChanged();
+                        mAgendaView.collapseGroup(position - 1);
                     }
                 }
                 break;

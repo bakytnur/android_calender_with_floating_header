@@ -51,7 +51,7 @@ public class AddEventActivity extends AppCompatActivity implements
     private static TextView mEndTimeText;
     private Calendar mPrevStartDateTime;
     private TextView mAlertTypeText;
-    private ToggleButton mAllDayToggle;
+    private ToggleButton mFullDayToggle;
     // the add_event we are creating or editing
     private Event mEvent;
     private AccountManager mAccountManager;
@@ -92,8 +92,8 @@ public class AddEventActivity extends AppCompatActivity implements
         mEndTimeText.setOnClickListener(this);
         mEditEventDescr = (EditText) findViewById(R.id.event_description);
 
-        mAllDayToggle = (ToggleButton) findViewById(R.id.all_day_toggle);
-        mAllDayToggle.setOnCheckedChangeListener(this);
+        mFullDayToggle = (ToggleButton) findViewById(R.id.all_day_toggle);
+        mFullDayToggle.setOnCheckedChangeListener(this);
 
         mAlertTypeText = (TextView) findViewById(R.id.event_alert_type);
         mAlertTypeText.setOnClickListener(this);
@@ -135,6 +135,7 @@ public class AddEventActivity extends AppCompatActivity implements
         mEditEventTitle.setText(mEvent.getTitle());
         mEditEventDescr.setText(mEvent.getDescription());
         mEditLocation.setText(mEvent.getLocation());
+        mFullDayToggle.setChecked(mEvent.isFullDayEvent());
         mAlertTypeText.setText(ViewEventActivity.getAlertTypeText(mEvent.getAlertType()));
         mStartDateText.setText(Utils.getFormattedDate(mEvent.getStartTime()));
         mEndDateText.setText(Utils.getFormattedDate(mEvent.getEndTime()));
@@ -177,6 +178,7 @@ public class AddEventActivity extends AppCompatActivity implements
         mEvent.setTitle(mEditEventTitle.getText().toString().trim());
         mEvent.setDescription(mEditEventDescr.getText().toString().trim());
         mEvent.setLocation(mEditLocation.getText().toString().trim());
+        mEvent.setFullDayEvent(mFullDayToggle.isChecked());
 
         String startDateTime = mStartDateText.getText().toString() + " " + mStartTimeText.getText().toString();
         String endDateTime = mEndDateText.getText().toString() + " " + mEndTimeText.getText().toString();
@@ -240,6 +242,7 @@ public class AddEventActivity extends AppCompatActivity implements
         Intent intent = new Intent(this, OutlookNotifyService.class);
         intent.putExtra("title", mEvent.getTitle());
         intent.putExtra("date", date);
+        intent.putExtra("alert", mEvent.getAlertType());
         PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         return pendingIntent;
     }
@@ -250,7 +253,7 @@ public class AddEventActivity extends AppCompatActivity implements
             AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
             PendingIntent pendingIntent = createAlarmIntent(mEvent.getStartTime());
             long triggerAtMillis = calendar.getTimeInMillis() - ViewEventActivity.getTriggerBefore(mEvent.getAlertType());
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, triggerAtMillis, 0, pendingIntent);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
         }
     }
 
