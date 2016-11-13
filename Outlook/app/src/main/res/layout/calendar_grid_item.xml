@@ -1,61 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/circle_layout"
+    android:id="@+id/outer_layout"
     android:layout_width="match_parent"
     android:layout_height="@dimen/calendar_item_height"
     android:clickable="true"
     android:background="?android:attr/selectableItemBackground">
-    <TextView
-        android:id="@+id/month_text_view"
+    <RelativeLayout
+        android:id="@+id/circle_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:textSize="@dimen/grid_item_month_text_size"
-        android:gravity="center_horizontal"
-        android:textColor="@color/colorGridText"
-        android:visibility="gone"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true" />
+        android:layout_height="@dimen/calendar_item_height"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:background="?android:attr/selectableItemBackground">
+        <TextView
+            android:id="@+id/month_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textSize="@dimen/grid_item_month_text_size"
+            android:gravity="center_horizontal"
+            android:textColor="@color/colorGridText"
+            android:visibility="gone"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true" />
 
-    <TextView
-        android:id="@+id/day_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="0dp"
-        android:textSize="@dimen/grid_item_day_text_size"
-        android:textColor="@android:color/darker_gray"
-        android:visibility="visible"
-        android:layout_below="@+id/month_text_view"
-        android:gravity="center"
-        android:layout_centerInParent="true" />
+        <TextView
+            android:id="@+id/day_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:textSize="@dimen/grid_item_day_text_size"
+            android:textColor="@android:color/darker_gray"
+            android:visibility="visible"
+            android:layout_below="@+id/month_text_view"
+            android:gravity="center"
+            android:layout_centerInParent="true" />
 
-    <TextView
-        android:id="@+id/year_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="2dp"
-        android:textSize="@dimen/grid_item_month_text_size"
-        android:textColor="@color/colorGridText"
-        android:visibility="visible"
-        android:gravity="center_horizontal"
-        android:layout_below="@+id/day_text_view"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"/>
-    <View
-        android:id="@+id/event_indicator"
-        android:layout_width="2dp"
-        android:layout_height="2dp"
-        android:background="@drawable/event_indicator"
-        android:layout_marginRight="3dp"
-        android:layout_marginBottom="3dp"
-        android:visibility="visible"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true" />
-    <View
-        android:id="@+id/shadow_view"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@drawable/layout_shadow"
-        android:layout_alignParentBottom="true" />
+        <TextView
+            android:id="@+id/year_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:textSize="@dimen/grid_item_month_text_size"
+            android:textColor="@color/colorGridText"
+            android:visibility="visible"
+            android:gravity="center_horizontal"
+            android:layout_below="@+id/day_text_view"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"/>
+        <View
+            android:id="@+id/event_indicator"
+            android:layout_width="2dp"
+            android:layout_height="2dp"
+            android:background="@drawable/event_indicator"
+            android:layout_marginRight="3dp"
+            android:layout_marginBottom="3dp"
+            android:visibility="visible"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true" />
+        <View
+            android:id="@+id/shadow_view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/layout_shadow"
+            android:layout_alignParentBottom="true" />
 </RelativeLayout>
+</LinearLayout>

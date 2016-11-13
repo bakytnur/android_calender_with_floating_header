@@ -12,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
@@ -25,9 +24,9 @@ import java.util.List;
 import bakha.ms.outlook.data.Account;
 import bakha.ms.outlook.data.AccountManager;
 import bakha.ms.outlook.data.OutlookManager;
-import bakha.ms.outlook.ui.recyclerview.MyRecyclerViewAdapter;
 import bakha.ms.outlook.ui.view.AgendaView;
 import bakha.ms.outlook.ui.view.CalendarExpandListener;
+import bakha.ms.outlook.ui.view.CalendarRecyclerViewAdapter;
 import bakha.ms.outlook.ui.view.DateChangeListener;
 import bakha.ms.outlook.ui.view.ExpandableView;
 
@@ -40,10 +39,8 @@ public class OutlookActivity extends AppCompatActivity
 
     private static final String TAG = "OutlookActivity";
     private AccountManager mAccountManager;
-    //private GridView mCalendarView;
     private RecyclerView mCalendarView;
-    //private CalendarViewAdapter mCalendarViewAdapter;
-    private MyRecyclerViewAdapter mCalendarViewAdapter;
+    private CalendarRecyclerViewAdapter mCalendarViewAdapter;
     private ExpandableView mExpandableView;
     private OutlookManager mOutlookManager;
     private AgendaView mAgendaView;
@@ -141,14 +138,10 @@ public class OutlookActivity extends AppCompatActivity
     }
 
     private void initializeCalendar() {
-        //mCalendarView = (GridView) findViewById(R.id.outlook_calendar_view);
-        //mCalendarView.setNumColumns(7);
-        //mCalendarViewAdapter = new CalendarViewAdapter(this, this);
-        //mCalendarView.setAdapter(mCalendarViewAdapter);
-        //mCalendarView.setOnScrollListener(this);
         mCalendarView = (RecyclerView) findViewById(R.id.recycler_view);
-        mCalendarViewAdapter = new MyRecyclerViewAdapter(mContext, this);
+        mCalendarViewAdapter = new CalendarRecyclerViewAdapter(mContext, this);
         mCalendarView.setAdapter(mCalendarViewAdapter);
+        mCalendarView.setClickable(true);
         mCalendarView.setLayoutManager(new GridLayoutManager(this, 7));
         mCalendarView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -168,6 +161,7 @@ public class OutlookActivity extends AppCompatActivity
                 super.onScrolled(recyclerView, dx, dy);
             }
         });
+
         scrollCalendarView(PREVIOUS_3_MONTHS + mOutlookManager.getCurrentWeekDay());
     }
 
@@ -283,13 +277,11 @@ public class OutlookActivity extends AppCompatActivity
 
     private void scrollCalendarView(int position) {
         if (mCalendarView != null) {
-            //mCalendarView.setSelection(position);
             mCalendarView.scrollToPosition(position);
         }
     }
 
     private void scrollAgendaView(int groupPosition) {
-        Log.d("tag", "scrollAgendaView = " + groupPosition);
         if (mAgendaView != null) {
             mAgendaView.setSelectedGroup(groupPosition);
         }
