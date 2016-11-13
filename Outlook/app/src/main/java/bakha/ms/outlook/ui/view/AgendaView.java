@@ -156,6 +156,9 @@ public class AgendaView extends RelativeLayout implements AbsListView.OnScrollLi
                         if (nextItem instanceof IAgendaView) {
                             if (nextItemType == AgendaViewType.CHILD_VIEW) {
                                 mChildHeight = nextItem.getHeight();
+                                if (currentItemType == AgendaViewType.CHILD_VIEW) {
+                                    mChildHeight = mChildHeight + currentItem.getHeight();
+                                }
                             }
                         }
                     } else if (mDirection == Direction.DOWN) {
@@ -163,6 +166,9 @@ public class AgendaView extends RelativeLayout implements AbsListView.OnScrollLi
                         if (currentItem instanceof IAgendaView) {
                             if (currentItemType == AgendaViewType.CHILD_VIEW) {
                                 mChildHeight = currentItem.getHeight();
+                                if (nextItemType == AgendaViewType.CHILD_VIEW) {
+                                    mChildHeight = mChildHeight + nextItem.getHeight();
+                                }
                             }
                         }
                     }
