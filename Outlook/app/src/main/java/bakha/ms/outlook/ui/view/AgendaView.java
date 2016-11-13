@@ -153,11 +153,13 @@ public class AgendaView extends RelativeLayout implements AbsListView.OnScrollLi
 
                     /*** When scrolling UP ***/
                     if (mDirection == Direction.UP) {
-                        if (nextItem instanceof IAgendaView) {
-                            if (nextItemType == AgendaViewType.CHILD_VIEW) {
+                        if (currentItem instanceof IAgendaView) {
+                            if (currentItemType == AgendaViewType.GROUP_VIEW) {
                                 mChildHeight = nextItem.getHeight();
-                                if (currentItemType == AgendaViewType.CHILD_VIEW) {
-                                    mChildHeight = mChildHeight + currentItem.getHeight();
+                            } else {
+                                mChildHeight = currentItem.getHeight();
+                                if (nextItemType == AgendaViewType.CHILD_VIEW) {
+                                    mChildHeight = mChildHeight + nextItem.getHeight();
                                 }
                             }
                         }
