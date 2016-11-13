@@ -8,3 +8,4 @@
 # All events are divided to timeSlots. A timeSlot is an object which keeps a data of a single day. So, events which covers 3 days are divided into 3 timeSlots.
 # I used icons from Google https://material.io/icons/#ic_alarm 
 # Notification alert type is added, and when alert type is selected other than "None", there will be scheduled notification.
+# Floating header is added
