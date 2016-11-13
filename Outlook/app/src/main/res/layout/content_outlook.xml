@@ -84,7 +84,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="@dimen/calendar_min_height">
-        <GridView
+        <!--<GridView
             android:id="@+id/outlook_calendar_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -93,7 +93,19 @@
             android:numColumns="7"
             android:smoothScrollbar="true"
             android:scrollingCache="false"
-            android:animationCache="false"/>
+            android:animationCache="false"/> -->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:visibility="visible"
+            android:scrollbars="vertical"
+            android:stretchMode="columnWidth"
+            android:numColumns="7"
+            android:smoothScrollbar="true"
+            android:scrollingCache="false"
+            />
     </bakha.ms.outlook.ui.view.ExpandableView>
     <View
         android:id="@+id/shadow_view"
@@ -110,11 +122,4 @@
         android:layout_weight="1">
 
     </bakha.ms.outlook.ui.view.AgendaView>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_centerInParent="true"
-        android:visibility="gone"/>
 </LinearLayout>

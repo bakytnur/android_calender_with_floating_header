@@ -137,7 +137,7 @@ public class CalendarViewAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 mOutlookManager.setPosition(position);
-                notifyCurrentDateChanged(R.id.outlook_calendar_view, (int) getItemId(position));
+                //notifyCurrentDateChanged(R.id.outlook_calendar_view, (int) getItemId(position));
                 notifyDataSetChanged();
             }
         });

@@ -2,17 +2,18 @@ package bakha.ms.outlook.ui.recyclerview;
 
 import android.content.Context;
 import android.graphics.PointF;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearSmoothScroller;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 
-public class MyCustomLayoutManager extends LinearLayoutManager {
+public class MyCustomLayoutManager extends GridLayoutManager {
     private static final float MILLISECONDS_PER_INCH = 50f;
+    private static final int COLUMN_COUNT = 7;
     private Context mContext;
 
     public MyCustomLayoutManager(Context context) {
-        super(context);
+        super(context, COLUMN_COUNT);
         mContext = context;
     }
 

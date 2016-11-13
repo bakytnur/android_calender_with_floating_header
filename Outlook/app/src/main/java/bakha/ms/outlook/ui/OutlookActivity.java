@@ -9,14 +9,14 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
-import android.widget.AbsListView;
-import android.widget.GridView;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -25,22 +25,25 @@ import java.util.List;
 import bakha.ms.outlook.data.Account;
 import bakha.ms.outlook.data.AccountManager;
 import bakha.ms.outlook.data.OutlookManager;
+import bakha.ms.outlook.ui.recyclerview.MyRecyclerViewAdapter;
 import bakha.ms.outlook.ui.view.AgendaView;
-import bakha.ms.outlook.ui.view.DateChangeListener;
-import bakha.ms.outlook.ui.view.CalendarViewAdapter;
-import bakha.ms.outlook.ui.view.ExpandableView;
 import bakha.ms.outlook.ui.view.CalendarExpandListener;
+import bakha.ms.outlook.ui.view.DateChangeListener;
+import bakha.ms.outlook.ui.view.ExpandableView;
 
+import static android.support.v7.widget.RecyclerView.SCROLL_STATE_DRAGGING;
 import static bakha.ms.outlook.data.OutlookManager.PREVIOUS_3_MONTHS;
 
 
 public class OutlookActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, CalendarExpandListener, DateChangeListener, AbsListView.OnScrollListener {
+        implements NavigationView.OnNavigationItemSelectedListener, CalendarExpandListener, DateChangeListener {
 
     private static final String TAG = "OutlookActivity";
     private AccountManager mAccountManager;
-    private GridView mCalendarView;
-    private CalendarViewAdapter mCalendarViewAdapter;
+    //private GridView mCalendarView;
+    private RecyclerView mCalendarView;
+    //private CalendarViewAdapter mCalendarViewAdapter;
+    private MyRecyclerViewAdapter mCalendarViewAdapter;
     private ExpandableView mExpandableView;
     private OutlookManager mOutlookManager;
     private AgendaView mAgendaView;
@@ -138,11 +141,33 @@ public class OutlookActivity extends AppCompatActivity
     }
 
     private void initializeCalendar() {
-        mCalendarView = (GridView) findViewById(R.id.outlook_calendar_view);
-        mCalendarView.setNumColumns(7);
-        mCalendarViewAdapter = new CalendarViewAdapter(this, this);
+        //mCalendarView = (GridView) findViewById(R.id.outlook_calendar_view);
+        //mCalendarView.setNumColumns(7);
+        //mCalendarViewAdapter = new CalendarViewAdapter(this, this);
+        //mCalendarView.setAdapter(mCalendarViewAdapter);
+        //mCalendarView.setOnScrollListener(this);
+        mCalendarView = (RecyclerView) findViewById(R.id.recycler_view);
+        mCalendarViewAdapter = new MyRecyclerViewAdapter(mContext, this);
         mCalendarView.setAdapter(mCalendarViewAdapter);
-        mCalendarView.setOnScrollListener(this);
+        mCalendarView.setLayoutManager(new GridLayoutManager(this, 7));
+        mCalendarView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                switch (newState) {
+                    case SCROLL_STATE_DRAGGING:
+                        if (mExpandableView.isCollapsed()) {
+                            mExpandableView.expand();
+                        }
+                        break;
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
         scrollCalendarView(PREVIOUS_3_MONTHS + mOutlookManager.getCurrentWeekDay());
     }
 
@@ -241,28 +266,12 @@ public class OutlookActivity extends AppCompatActivity
         if (viewId != R.id.agenda_view) {
             scrollAgendaView(position);
         } else if (viewId == R.id.agenda_view) {
-            mCalendarView.smoothScrollToPosition(position);
+            mCalendarView.scrollToPosition(position);
             mCalendarViewAdapter.notifyDataSetChanged();
         }
     }
 
-    @Override
-    public void onScrollStateChanged(AbsListView view, int scrollState) {
-        switch (view.getId()) {
-            case R.id.outlook_calendar_view:
-                if (scrollState == SCROLL_STATE_TOUCH_SCROLL) {
-                    if (mExpandableView.isCollapsed()) {
-                        mExpandableView.expand();
-                    }
-                }
-                break;
-        }
-    }
 
-    @Override
-    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-
-    }
 
     @Override
     public void onDestroy() {
@@ -274,7 +283,8 @@ public class OutlookActivity extends AppCompatActivity
 
     private void scrollCalendarView(int position) {
         if (mCalendarView != null) {
-            mCalendarView.setSelection(position);
+            //mCalendarView.setSelection(position);
+            mCalendarView.scrollToPosition(position);
         }
     }
 
