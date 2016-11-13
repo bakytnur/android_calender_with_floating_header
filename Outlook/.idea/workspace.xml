@@ -6,14 +6,7 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f865cbfd-a0ae-4a9e-9292-c9f114e3e5c7" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/bakha/ms/outlook/ui/recyclerview/MyCustomLayoutManager.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/bakha/ms/outlook/ui/view/CalendarViewAdapter.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/bakha/ms/outlook/ui/recyclerview/MyRecyclerViewAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/bakha/ms/outlook/ui/view/CalendarRecyclerViewAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/bakha/ms/outlook/ui/OutlookActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/bakha/ms/outlook/ui/OutlookActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/calendar_grid_item.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/calendar_grid_item.xml" />
-    </list>
+    <list default="true" id="f865cbfd-a0ae-4a9e-9292-c9f114e3e5c7" name="Default" comment="" />
     <ignored path="Outlook.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
