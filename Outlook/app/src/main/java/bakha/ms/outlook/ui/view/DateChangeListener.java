@@ -1,5 +1,5 @@
 package bakha.ms.outlook.ui.view;
 
-public interface CalendarListener {
+public interface DateChangeListener {
     void currentDateChanged(int viewId, int position);
 }

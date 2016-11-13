@@ -52,7 +52,7 @@ public class AddEventActivity extends AppCompatActivity implements
     private Calendar mPrevStartDateTime;
     private TextView mAlertTypeText;
     private ToggleButton mFullDayToggle;
-    // the add_event we are creating or editing
+    // the event we are creating or editing
     private Event mEvent;
     private AccountManager mAccountManager;
     private OutlookManager mOutlookManager;
@@ -155,7 +155,7 @@ public class AddEventActivity extends AppCompatActivity implements
     }
 
     /**
-     * If start time if later than end time, reset the end time to the start time, and add 30 more minutes
+     * If the start time if later than then end time, reset the end time to the start time, and add 30 more minutes
      */
     private static void updateEndTimeIfRequired() {
         String startDateTime = mStartDateText.getText().toString() + " " + mStartTimeText.getText().toString();

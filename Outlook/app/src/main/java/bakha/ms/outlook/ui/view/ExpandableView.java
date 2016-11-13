@@ -10,7 +10,6 @@ import bakha.ms.outlook.ui.R;
 
 public class ExpandableView extends LinearLayout{
     private boolean mIsCollapsed;
-    private OnExpandListener mExpandListener;
 
     public ExpandableView(Context context) {
         super(context);
@@ -29,10 +28,6 @@ public class ExpandableView extends LinearLayout{
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
-    public void setExpandListener(OnExpandListener expandListener) {
-        mExpandListener = expandListener;
-    }
-
     public void expand() {
         final int targetHeight = (int) getResources().getDimension(R.dimen.calendar_max_height);
         final int initialHeight = (int) getResources().getDimension(R.dimen.calendar_min_height);
@@ -44,10 +39,6 @@ public class ExpandableView extends LinearLayout{
                 if (interpolatedTime == 1) {
                     getLayoutParams().height = targetHeight;
                     mIsCollapsed = false;
-
-                    if (mExpandListener != null) {
-                        mExpandListener.onExpand();
-                    }
                 } else {
                     // intermediate height will be the initial height + the gap * interpolated time
                     getLayoutParams().height = initialHeight + (int)((targetHeight - initialHeight) * interpolatedTime);
@@ -75,10 +66,6 @@ public class ExpandableView extends LinearLayout{
                 if (interpolatedTime == 1) {
                     getLayoutParams().height = targetHeight;
                     mIsCollapsed = true;
-
-                    if (mExpandListener != null) {
-                        mExpandListener.onCollapse();
-                    }
                 } else {
                     // intermediate height will be the initial height - the gap * interpolated time
                     getLayoutParams().height = initialHeight - (int)((initialHeight - targetHeight) * interpolatedTime);

@@ -24,13 +24,13 @@ public class CalendarViewAdapter extends BaseAdapter {
     private List<Calendar> mCalendarDateList;
     private Map<String, List<TimeSlot>> mTimeSlots;
     private String mMonthsInFull[];
-    private CalendarListener mCalendarListener;
+    private DateChangeListener mDateChangeListener;
     private Drawable mPreviousBackground;
 
-    public CalendarViewAdapter(Context context, CalendarListener calendarListener) {
+    public CalendarViewAdapter(Context context, DateChangeListener dateChangeListener) {
         mContext = context;
         mOutlookManager = OutlookManager.getInstance(mContext);
-        mCalendarListener = calendarListener;
+        mDateChangeListener = dateChangeListener;
         initializeMonths();
         refresh();
     }
@@ -45,7 +45,7 @@ public class CalendarViewAdapter extends BaseAdapter {
     }
 
     private void notifyCurrentDateChanged(int viewId, int position) {
-        mCalendarListener.currentDateChanged(viewId, position);
+        mDateChangeListener.currentDateChanged(viewId, position);
     }
 
     @Override
@@ -106,7 +106,7 @@ public class CalendarViewAdapter extends BaseAdapter {
             convertView.setBackgroundColor(mContext.getResources().getColor(android.R.color.white));
         }
 
-        // check if there is an add_event on this day
+        // check if there is an event on this day
         Calendar calendar = mCalendarDateList.get(position);
         String dateKey = Utils.makeKeyForDate(calendar);
         List<TimeSlot> timeSlots = mTimeSlots.get(dateKey);
@@ -135,7 +135,7 @@ public class CalendarViewAdapter extends BaseAdapter {
         convertView.setClickable(true);
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 mOutlookManager.setPosition(position);
                 notifyCurrentDateChanged(R.id.outlook_calendar_view, (int) getItemId(position));
                 notifyDataSetChanged();

@@ -22,6 +22,11 @@ public class OutlookManager {
     private static OutlookManager instance;
     private List<Calendar> calendarDateList;
     private Map<Integer, Event> events;
+    /**
+     * As event includes the list of time slots, this may not be needed.
+     * But the reason I am keeping the time slots in HashMap is it will be just faster for rendering during getView()
+     * as getting the time slots from event needs more calculations.
+     */
     private Map<String, List<TimeSlot>> timeSlots;
     private Calendar calendar;
     private Context context;

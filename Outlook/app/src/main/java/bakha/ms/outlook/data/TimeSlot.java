@@ -3,9 +3,9 @@ package bakha.ms.outlook.data;
 import java.util.Calendar;
 
 /**
- * If the add_event covers more than one day,
- * we can split the add_event to the time slots.
- * Each time slot represents the add_event on a single day
+ * If the event covers more than one day,
+ * we can split the event to the time slots.
+ * Each time slot represents the event on a single day
  */
 
 public class TimeSlot implements Comparable<TimeSlot>{

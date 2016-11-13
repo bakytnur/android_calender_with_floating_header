@@ -18,7 +18,7 @@ public class Utils {
     public static final String SIMPLE_TIME_FORMAT = "hh:mm a";
 
     /**
-     * To check if there is a add_event on a particular day, we need to check the date only
+     * To check if there is a event on a particular day, we need to check the date only
      * @param date
      * @param anotherDate
      * @return

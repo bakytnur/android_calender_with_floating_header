@@ -23,6 +23,7 @@ import bakha.ms.outlook.ui.R;
 import bakha.ms.outlook.ui.ViewEventActivity;
 
 public class AgendaViewAdapter extends BaseExpandableListAdapter {
+    private static final String TAG = "AgendaViewAdapter";
     private List<Calendar> mCalendarDateList;
     private Map<Integer, Event> mEvents;
     private Map<String, List<TimeSlot>> mTimeSlots;
@@ -65,7 +66,7 @@ public class AgendaViewAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getGroup(int groupPosition) {
-        return Integer.valueOf(groupPosition);
+        return mCalendarDateList.get(groupPosition);
     }
 
     @Override
@@ -80,12 +81,12 @@ public class AgendaViewAdapter extends BaseExpandableListAdapter {
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
-        return childPosition;
+        return 10000 * groupPosition +  childPosition;
     }
 
     @Override
     public boolean hasStableIds() {
-        return false;
+        return true;
     }
 
     @Override
@@ -96,21 +97,13 @@ public class AgendaViewAdapter extends BaseExpandableListAdapter {
             convertView = layoutInflater.inflate(R.layout.agenda_view_group, null);
         }
 
+        ((AgendaViewGroup) convertView).setPosition(groupPosition);
         ExpandableListView agendaView = (ExpandableListView) parent;
         agendaView.expandGroup(groupPosition);
 
         TextView agendaViewGroup = (TextView) convertView
                 .findViewById(R.id.agenda_view_group_text);
-        agendaViewGroup.setTextColor(mContext.getResources().getColor(R.color.colorGroupText));
-
-        Calendar calendarDate = mCalendarDateList.get(groupPosition);
-        Calendar todayDate = mOutlookManager.getTodayDate();
-        if (todayDate.compareTo(calendarDate) == 0) {
-            agendaViewGroup.setTextColor(mContext.getResources().getColor(R.color.colorGridText));
-        }
-
-        agendaViewGroup.setText(getProperDateString(calendarDate));
-        agendaViewGroup.setText(agendaViewGroup.getText().toString().toUpperCase());
+        setTextForView(agendaViewGroup, groupPosition);
         return convertView;
     }
 
@@ -122,6 +115,8 @@ public class AgendaViewAdapter extends BaseExpandableListAdapter {
             convertView = layoutInflater.inflate(R.layout.agenda_view_child, null);
         }
 
+        ((AgendaViewChild) convertView).setPosition(childPosition);
+        ((AgendaViewChild) convertView).setHasContent(true);
         LinearLayout eventViewLayout = (LinearLayout) convertView
                 .findViewById(R.id.event_view_layout);
         eventViewLayout.setVisibility(View.GONE);
@@ -170,8 +165,10 @@ public class AgendaViewAdapter extends BaseExpandableListAdapter {
 
         if (!hasEvent) {
             agendaViewChild.setVisibility(View.VISIBLE);
+            ((AgendaViewChild) convertView).setHasContent(false);
         }
 
+        convertView.setClickable(true);
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -194,6 +191,23 @@ public class AgendaViewAdapter extends BaseExpandableListAdapter {
             }
         });
         return convertView;
+    }
+
+    /**
+     * Set formatted date text to textView
+     * @param textView
+     * @param position
+     */
+    public void setTextForView(TextView textView, int position) {
+        Calendar calendarDate = mCalendarDateList.get(position);
+        Calendar todayDate = mOutlookManager.getTodayDate();
+        if (todayDate.compareTo(calendarDate) == 0) {
+            textView.setTextColor(mContext.getResources().getColor(R.color.colorGridText));
+        } else {
+            textView.setTextColor(mContext.getResources().getColor(R.color.colorGroupText));
+        }
+
+        textView.setText(getProperDateString(calendarDate));
     }
 
     /**
@@ -229,7 +243,9 @@ public class AgendaViewAdapter extends BaseExpandableListAdapter {
             stringBuilder
                     .append(" ")
                     .append(calendar.get(Calendar.YEAR));
-        return stringBuilder.toString();
+
+        String dateString = stringBuilder.toString();
+        return dateString.toUpperCase();
     }
 
     @Override

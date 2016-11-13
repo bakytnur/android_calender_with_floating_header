@@ -1,5 +1,6 @@
 package bakha.ms.outlook.data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -7,7 +8,7 @@ import java.util.List;
 
 import bakha.ms.outlook.data.helper.Utils;
 
-public class Event {
+public class Event implements Serializable {
     private int eventId;
     private String title;
     private boolean isFullDayEvent;
@@ -100,7 +101,7 @@ public class Event {
     }
 
     /**
-     * Divides the add_event to the different time slots as each time slot represents
+     * Divides the event to the different time slots as each time slot represents
      * the incident on a single. So, the events are separated by a daily slots
      * @param startTime
      * @param endTime
@@ -110,7 +111,7 @@ public class Event {
 
         GregorianCalendar endOfDay = startTime;
 
-        // check if start and end time of the add_event at the same day
+        // check if start and end time of the event at the same day
         while (!Utils.compareDates(endOfDay, endTime)){
             TimeSlot timeSlot = new TimeSlot();
             timeSlot.setEventId(eventId);
@@ -139,5 +140,10 @@ public class Event {
 
         timeSlots.add(timeSlot);
         setTimeSlots(timeSlots);
+    }
+
+    @Override
+    public String toString() {
+        return this.eventId + " " + title + " " + startTime + " " + endTime;
     }
 }

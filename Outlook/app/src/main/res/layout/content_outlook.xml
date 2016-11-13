@@ -90,13 +90,16 @@
             android:layout_height="match_parent"
             android:scrollbars="vertical"
             android:stretchMode="columnWidth"
-            android:numColumns="7"/>
+            android:numColumns="7"
+            android:smoothScrollbar="true"
+            android:scrollingCache="false"
+            android:animationCache="false"/>
     </bakha.ms.outlook.ui.view.ExpandableView>
     <View
         android:id="@+id/shadow_view"
         android:layout_below="@+id/expandable_view"
         android:layout_width="match_parent"
-        android:layout_height="7dp"
+        android:layout_height="5dp"
         android:background="@drawable/layout_shadow"
         >
     </View>
@@ -104,8 +107,14 @@
         android:id="@+id/agenda_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:groupIndicator="@null">
+        android:layout_weight="1">
 
     </bakha.ms.outlook.ui.view.AgendaView>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
 </LinearLayout>
